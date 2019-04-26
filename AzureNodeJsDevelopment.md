@@ -10,3 +10,8 @@ Once you have installed the CLI tools you, can then run the following command in
 ### Login
 Before running most commands you must login to Azure. You can do this by running the: `az login ` command. 
 
+If you are running on windows you can use the windows credential manager to store and retrieve your credentials without having to re-enter them everytime. 
+
+[Click here for more info on using the windows credential manager]('./UsingWindowsCredentialManager.md')
+
+
