@@ -12,6 +12,6 @@ Before running most commands you must login to Azure. You can do this by running
 
 If you are running on windows you can use the windows credential manager to store and retrieve your credentials without having to re-enter them everytime. 
 
-[Click here for more info on using the windows credential manager]('./UsingWindowsCredentialManager.md')
+[Click here for more info on using the windows credential manager]('UsingWindowsCredentialManager.md')
 
 

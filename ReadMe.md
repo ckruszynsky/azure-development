@@ -3,7 +3,7 @@ This repo contains information for developing in Azure.  The examples / samples 
 
 Below are links to more information for different aspects of Azure Development : 
 
-* [Azure Node.JS Development Notes](./AzureNodeJSDevelopment.md)
+* [Azure Node.JS Development Notes](AzureNodeJSDevelopment.md)
 
-* [Azure Functions Development Notes](./AzureFunctionsDevelopment.md)
+* [Azure Functions Development Notes](AzureFunctionsDevelopment.md)
 
