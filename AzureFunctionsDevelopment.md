@@ -1,5 +1,12 @@
 # Azure Functions Development
 
+For information on the pricing for Azure functions : 
+[Click Here](AzureFunctionsPricePlan.md)
+
+
+## Docker Container Hosting ##
+-- TODO: get more information ---
+
 ## Required Packages
 Before beginning to develop Azure functions. The first thing you will need to install is the Azure Functions Core Tools v2.
 
@@ -7,6 +14,9 @@ Before beginning to develop Azure functions. The first thing you will need to in
 
 
 ## Getting Started
+
+You can try out azure functions without needing an account by going to: 
+(https://www.tryfunctions.com/try)
 
 After installing the package, open the command prompt in the directory you are working from; then run the following command : ` func init `
 

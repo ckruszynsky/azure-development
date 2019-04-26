@@ -13,3 +13,18 @@ If you are running on windows you can use the windows credential manager to stor
 [Click here for more info on using the windows credential manager](UsingWindowsCredentialManager.md)
 
 
+Once you have logged in, you will see a list of one or more json objects that will be displayed. These objects contain your subscription information and which will be used when running commands in the CLI tool.
+
+You can also see this information at anytime by running: ` az account list ` to see a list of your azure subscriptions. 
+
+### Setting your subscription to be used 
+To set the subscription you wish to use when running commands in the CLI tool. Run the following command :
+
+```powershell 
+  az  account set -s "<Name of your subscription>"
+```
+
+## Interactive Mode
+Run ` az interactive ` to enter the interactive mode. This mode will give you auto-completion and more information for the commands being ran. 
+
+
