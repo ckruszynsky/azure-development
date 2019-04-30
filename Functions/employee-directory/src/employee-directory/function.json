@@ -1,0 +1,22 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "anonymous",      
+      "type":"httpTrigger",
+      "route": "employee-directory/{employeeId?}",
+      "direction":"in",
+      "name":"req",
+      "methods":[
+        "get",
+        "post",
+        "options"
+      ]      
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    }
+  ]
+}
