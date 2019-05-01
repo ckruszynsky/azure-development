@@ -1,0 +1,24 @@
+{
+  "name": "employee-directory-secured",
+  "description": "",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build && func extensions install",
+    "start:host": "func start",
+    "start": "npm run start:host & npm run watch",
+    "build:production": "npm run prestart && npm prune --production",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/node": "^11.13.8",
+    "azure-functions-ts-essentials": "^1.3.2",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@azure/functions": "^1.0.1-beta2",
+    "typescript": "^3.4.5"
+  }
+}
