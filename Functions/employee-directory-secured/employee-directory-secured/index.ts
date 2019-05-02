@@ -8,7 +8,7 @@ import {
 
 
 
-import jwt  from 'jsonwebtoken';
+import jwt = require('jsonwebtoken');
 import employeesDb = require('./employees.json');
 
 
@@ -51,17 +51,22 @@ const insertOne = (employeeToAdd) => {
     };
 };
 
-const decodedValidToken = (accessToken: string) => {
+const decodedValidToken = (accessToken: string, context:Context) => {
     //public key 
     //retrieved from https://login.microsoftonline.com/common/.well-known/openid-configuration
     //pulled-from url listed at key : jwks_uri
     //https://login.microsoftonline.com/common/discovery/keys
     //then match the token from your request to the kid x5t values
 
-    const key: string = '-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIQV68hSN9DrrlCaA3NJ0bnfDANBgkqhkiG9w0BAQsFADAtMSswKQYDVQQDEyJhY2NvdW50cy5hY2Nlc3Njb250cm9sLndpbmRvd3MubmV0MB4XDTE4MTExMTAwMDAwMFoXDTIwMTExMTAwMDAwMFowLTErMCkGA1UEAxMiYWNjb3VudHMuYWNjZXNzY29udHJvbC53aW5kb3dzLm5ldDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALvfCr6FB37Ns9mCcn5Cc2hhWDOfHg9HqR3xE08DQ5egC/3E3zpJXMTOI6y1r1aqqdrB2h9IBaWD8qLzfv2pJhP+H5HNFcP8BjOYwz/o5zidbwb2xaBe7gQMuK95Z9nstT6BlIaZF3Q2sISH3QG3O1i7cqKRzVkFyN9+q14sI73Iy/HR4YnrwzpLbALIpQAz+cCU9Jck4nzjT2Tqvl1gsPRbVwEK+w54jgubg7lGi9JjNVCQoYgqw5hTgH+gjXbtksC4p12GrqjPTkRJSmBAoaBH4udX3LJpbJ+JrTT5MbLb0eziYiQab5OxS3omgbTJ7Ducd9Az4K4QGoK1Z9yGikUCAwEAAaMhMB8wHQYDVR0OBBYEFGWLmYFSm5Exg9VcAGSg5sFE1mXgMA0GCSqGSIb3DQEBCwUAA4IBAQB0yTGzyhx+Hz2vwBSo5xCkiIom6h7b946KKiWvgBLeOvAuxOsB15N+bbf51sUfUJ6jBaa1uJjJf27dxwH0oUe2fcmEN76QSrhULYe+k5yyJ7vtCnd6sHEfn9W6iRozv0cb48tESOTlFuwbYDVW+YZxzM9EQHC32CjugURzuN9/rf6nJ9etSeckRMO8QPqyIi4e5sGSDYExxNs7J4prhIbtYT4NRiqc4nWzA/p5wSYOUgAZMSTLD/beSI81UN1Ao9VBBJu3v83d62WL3zHSbpUwtG/utNhSi/n/7Q94claEWJVhBx6LiA1hrU6YZkjRGqBOrWIZkSkh75xW6Xujocy4\n-----END CERTIFICATE-----';
-
-    // decode & verify token signed by AzureAD
-    return jwt.verify(accessToken, key);
+    const key: string = '-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIQWcq84CdVhKVEcKbZdMOMGjANBgkqhkiG9w0BAQsFADAtMSswKQYDVQQDEyJhY2NvdW50cy5hY2Nlc3Njb250cm9sLndpbmRvd3MubmV0MB4XDTE5MDMxNDAwMDAwMFoXDTIxMDMxNDAwMDAwMFowLTErMCkGA1UEAxMiYWNjb3VudHMuYWNjZXNzY29udHJvbC53aW5kb3dzLm5ldDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANGnwmoj3f8Zf3sGRnzpMSsGD3yOBH7tAjn82oyv4J74lpO8N0fvPA5m9I9uA0p9alUd6bQpwNfkFH1DMob5fKU+fre6EZCzT86dIVVfnQBt2aDGkhDFtMGqbIQOi1RkTqQZ3A5nOuocefrd3jhQNuH4in0Ir9kybYd2PY4R5y3uxgTqKJlmMf6SYhBt5oWBSLe7IWhMDXBI6N+L69Vls0ZvA/IKII6yVndZqMnhn7Vi8736fXu/UMB2Cb/dO70Gxa0+y2LsvIO/kacbo4LpsNpsewnsHAmV8D4mfq2jNwKdRYSDYhqXeZm22KxQwxSFgI1j1GOijb17XNuMlH2a+DECAwEAAaMhMB8wHQYDVR0OBBYEFIkZ5wrSV8lohIsreOmig7h5wQDkMA0GCSqGSIb3DQEBCwUAA4IBAQAd8sKZLwZBocM4pMIRKarK60907jQCOi1m449WyToUcYPXmU7wrjy9fkYwJdC5sniItVBJ3RIQbF/hyjwnRoIaEcWYMAftBnH+c19WIuiWjR3EHnIdxmSopezl/9FaTNghbKjZtrKK+jL/RdkMY9uWxwUFLjTAtMm24QOt2+CGntBA9ohQUgiML/mlUpf4qEqa2/Lh+bjiHl3smg4TwuIl0i/TMN9Rg7UgQ6BnqfgiuMl6BtBiatNollwgGNI2zJEi47MjdeMf8+C3tXs//asqqlqJCyVLwN7AN47ynYmkl89MleOfKIojhrGRxryZG2nRjD9u/kZbPJ8e3JE9px67\n-----END CERTIFICATE-----';
+    try{
+        context.log.info(`Validating access token`);
+        // decode & verify token signed by AzureAD
+        return jwt.verify(accessToken, key);
+    }
+    catch(error){
+        context.log.error(`Error decoding Token: ${error}`)
+    }    
 }
 
 
@@ -76,6 +81,7 @@ const decodedValidToken = (accessToken: string) => {
   * @param {Promise<any>}
   */
 export async function run(context: Context, req: HttpRequest): Promise<any> {
+    context.log.info("Starting Request");
     let response: any;
     const employeeId = req.params
         ? req.params.employeeId
@@ -87,17 +93,18 @@ export async function run(context: Context, req: HttpRequest): Promise<any> {
     let isUser: boolean = false;
     const authHeader: string = req.headers.authorization;
 
+    context.log.info(`Retrieved AuthHeader: ${authHeader}`);
     try {
-        const decodedToken = decodedValidToken(authHeader.replace('Bearer', '') as any);
+        const accessToken = authHeader.replace('Bearer ','');
+        context.log.info(`Decoding Token: ${accessToken}`);
+        const decodedToken = (decodedValidToken(accessToken,context) as any);
+
+        context.log.info(`Reading scopes from token`);
         const scopes: string = (decodedToken.scp as string);
 
         //check for read & write operations
         hasEmployeeReadScope = (scopes.indexOf('EmployeeDirectory.Read') >= 0)
-        hasEmployeeWriteScope = (scopes.indexOf('EmployeeDierectory.Write') >= 0)
-
-        //check if it's specific user
-        isUser = (decodedToken.upn.indexOf('@foobar.com') !== -1);
-
+        hasEmployeeWriteScope = (scopes.indexOf('EmployeeDirectory.Write') >= 0)
         isValidRequest = true;
     }
     catch (error) {
